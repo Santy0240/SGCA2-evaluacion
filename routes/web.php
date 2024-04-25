@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\clientescontroller;
 use App\Http\Controllers\vehiculoscontroller;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,11 @@ Route ::get('/vehiculos/create',[vehiculoscontroller::class,'create'])->name('ve
 Route ::delete('/vehiculos/{vehiculo}',[vehiculoscontroller::class,'destroy'])->name('vehiculos.destroy');
 Route ::put('/vehiculos/{vehiculo}',[vehiculoscontroller::class,'update'])->name('vehiculos.update');
 Route ::get('/vehiculos/{vehiculo}/edit',[vehiculoscontroller::class,'edit'])->name('vehiculos.edit');
+
+//rutas clientes
+Route ::get('/clientes',[clientescontroller::class,'index'])->name('clientes.index');
+Route ::post('/clientes',[clientescontroller::class,'store'])->name('clientes.store');
+Route ::get('/clientes/create',[clientescontroller::class,'create'])->name('clientes.create');
+Route ::delete('/clientes/{cliente}',[clientescontroller::class,'destroy'])->name('clientes.destroy');
+Route ::put('/clientes/{cliente}',[clientescontroller::class,'update'])->name('clientes.update');
+Route ::get('/clientes/{cliente}/edit',[clientescontroller::class,'edit'])->name('clientes.edit');
