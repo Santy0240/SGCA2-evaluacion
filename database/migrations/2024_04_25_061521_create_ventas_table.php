@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_venta');
             $table->integer('id_vehiculo');
             $table->integer('id_cliente');
-            $table->integer('fecha_venta');
+            $table->date('fecha_venta');
             $table->integer('precio_final');
             $table->timestamps();
         });
