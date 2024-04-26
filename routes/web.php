@@ -3,6 +3,7 @@
 use App\Http\Controllers\clientescontroller;
 use App\Http\Controllers\vehiculoscontroller;
 use App\Http\Controllers\ventascontroller;
+use App\Models\vehiculos;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+//rutas menu 
+Route::get('/vehiculos/index', function () {
+    return view('vehiculos.index');
+})->name('vehiculos.index');
+Route::get('/clientes/index', function () {
+    return view('clientes.index');
+})->name('clientes.index');
+Route::get('/ventas/index', function () {
+    return view('ventas.index');
+})->name('ventas.index');
+
 
 //rutas vehiculos 
 Route ::get('/vehiculos',[vehiculoscontroller::class,'index'])->name('vehiculos.index');
