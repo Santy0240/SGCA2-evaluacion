@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\clientescontroller;
 use App\Http\Controllers\vehiculoscontroller;
 use App\Http\Controllers\ventascontroller;
-use App\Models\vehiculos;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,19 +20,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-//rutas menu 
-Route::get('/vehiculos/index', function () {
-    return view('vehiculos.index');
-})->name('vehiculos.index');
-Route::get('/clientes/index', function () {
-    return view('clientes.index');
-})->name('clientes.index');
-Route::get('/ventas/index', function () {
-    return view('ventas.index');
-})->name('ventas.index');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
-//rutas vehiculos 
 Route ::get('/vehiculos',[vehiculoscontroller::class,'index'])->name('vehiculos.index');
 Route ::post('/vehiculos',[vehiculoscontroller::class,'store'])->name('vehiculos.store');
 Route ::get('/vehiculos/create',[vehiculoscontroller::class,'create'])->name('vehiculos.create');
@@ -56,3 +54,6 @@ Route ::delete('/ventas/{venta}',[ventascontroller::class,'destroy'])->name('ven
 Route ::put('/ventas/{venta}',[ventascontroller::class,'update'])->name('ventas.update');
 Route ::get('/ventas/{venta}/edit',[ventascontroller::class,'edit'])->name('ventas.edit');
 
+});
+
+require __DIR__.'/auth.php';
